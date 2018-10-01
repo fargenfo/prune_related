@@ -9,7 +9,9 @@ The networkx (v2.1 or newer) Python library must be installed in the environment
 * Construct a graph, where two individuals are connected if they are highly related
 * Find an approximate maximum independent set
 
-A maximum independent set is a set of nodes of a graph such that no two nodes are connected in the graph. We find an approximation to the maximum independent set using a NetworkX implementation of an algorithm described in the following paper:
+A maximum independent set is a set of nodes of a graph such that no two nodes are connected in the graph. We
+find an approximation to the maximum independent set using a NetworkX implementation of an algorithm
+described in the following paper:
 
 Boppana, R., & Halldórsson, M. M. (1990). Approximating maximum independent sets by excluding subgraphs. In Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics). https://doi.org/10.1007/3-540-52846-6_74
 
