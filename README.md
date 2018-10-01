@@ -8,6 +8,10 @@ The procedure is:
 * Construct a graph, where two individuals are connected if they are highly related
 * Find an approximate maximum independent set
 
+This is also illustrated in the figure below.
+
+<img src="illustration.png" alt="Heuristic illustration" width="500"/>
+
 A maximum independent set is a set of nodes of a graph such that no two nodes are connected in the graph. We
 find an approximation to the maximum independent set using a NetworkX implementation of an algorithm
 described in the following paper:
