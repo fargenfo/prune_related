@@ -16,13 +16,15 @@ described in the following paper:
 Boppana, R., & Halldorsson, M. M. (1990). Approximating maximum independent sets by excluding subgraphs. In Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics). https://doi.org/10.1007/3-540-52846-6_74
 
 Usage:
-    python prune_related.py [kinship matrix] [threshold] [output file]
+    python prune_related.py [kinship matrix] [threshold] [output file] [column names] [row names]
 
 Input:
     Kinship matrix:     Path to CSV file with kinship coefficients between individuals. The CSV must be comma
                         separated and have no column or row names.
     Threshold:          Pairs of individuals with kinship above this will be considered highly related.
     Output file:        Output will be written to a file with this path.
+    Column names:       "true"/"false", whether or not the CSV file contains column names.
+    Row names:          "true"/"false", whether or not the CSV file contains row names.
 
 Example:
     python prune_related.py kinship_matrix.csv 0.0625 pruned_individuals.txt
@@ -34,32 +36,9 @@ Output:
 from networkx import from_numpy_matrix
 from networkx.algorithms.approximation.independent_set import maximum_independent_set
 import numpy as np
+import pandas as pd
 import sys
 
-def read_matrix_from_csv(csv_path):
-    '''
-    Read CSV into memory and convert to NumPy array.
-
-    Input:
-    csv_path:       String, path to CSV file.
-
-    Returns:
-    Numpy array.
-    '''
-
-    kc = []
-    with open(csv_path) as fid:
-        for i, line in enumerate(fid):
-            # Remove newline ("\n") and split by comma(",") to return a list.
-              row = line[:-1].split(',')
-              # Convert elements from strings to floats.
-              # Also strip any whitespace before converting to float.
-              row = [float(x.strip()) for x in row]
-              kc.append(row)
-
-    kc = np.array(kc)
-
-    return kc
 
 def prune_related(kc, kc_thres):
     '''
@@ -102,8 +81,35 @@ if __name__ == '__main__':
 
     out_path = sys.argv[3]
 
+    # Parse arguments "colnames" and "rownames", if provided.
+    if len(sys.argv) > 4:
+        colnames = sys.argv[4]
+
+        if colnames == 'true':
+            colnames == True
+        elif colnames == 'false':
+            colnames = False
+        else:
+            raise ValueError('Argument "colnames" must be either "true" or "false".')
+    else:
+        colnames = False
+
+    if len(sys.argv) > 5:
+        rownames = sys.argv[5]
+        if rownames == 'true':
+            rownames == True
+        elif rownames == 'false':
+            rownames = False
+        else:
+            raise ValueError('Argument "rownames" must be either "true" or "false".')
+    else:
+        rownames = False
+
     # Read matrix into NumPy array.
-    kc = read_matrix_from_csv(csv_path)
+    header = 0 if colnames else None
+    index_col = 0 if rownames else None
+    kc = pd.read_csv(csv_path, header=header, index_col=index_col)
+    kc = np.array(kc)
 
     # Prune related individuals.
     mis = prune_related(kc, kc_thres)
