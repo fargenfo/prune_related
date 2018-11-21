@@ -27,6 +27,8 @@ Input:
                         separated and have no column or row names.
     Threshold:          Pairs of individuals with kinship above this will be considered highly related.
     Output file:        Output will be written to a file with this path.
+    Column names:       "true"/"false", whether or not the CSV file contains column names.
+    Row names:          "true"/"false", whether or not the CSV file contains row names.
 
 Example:
     python prune_related.py kinship_matrix.csv 0.0625 pruned_individuals.txt
