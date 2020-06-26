@@ -24,7 +24,7 @@ This is also illustrated in the figure below.
 
 A maximum independent set is a set of nodes of a graph such that no two nodes are connected in the graph. We
 find an approximation to the maximum independent set using a NetworkX implementation of an algorithm
-described in the following paper:
+described in the paper below. The worst-case time complexity of this algorithm is O(n/(log n)^2).
 
 * Boppana, R., & Halldórsson, M. M. (1990). Approximating maximum independent sets by excluding subgraphs. In Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics). https://doi.org/10.1007/3-540-52846-6_74
 
