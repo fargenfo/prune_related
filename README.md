@@ -1,7 +1,17 @@
 This tool uses a heuristic to remove highly related individuals, based on a supplied kinship matrix and
 a threshold. The output of the pruning procedure is then a list of individuals to keep.
 
-The NetworkX (v2.1 or newer) Python library must be installed in the environment.
+Dependencies:
+* Python >= 3.6
+* networkx >= 2.1
+* numpy >= 1.18.5
+* pandas >= 1.0.5
+
+Installation via `conda`:
+
+```
+conda env create environment.yml
+```
 
 The procedure is:
 * Find relationships where kinship is above threshold
